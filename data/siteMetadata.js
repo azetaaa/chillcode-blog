@@ -2,14 +2,14 @@
 
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Next.js Starter Blog',
-  author: 'Tails Azimuth',
-  headerTitle: 'TailwindBlog',
-  description: 'A blog created with Next.js and Tailwind.css',
+  title: 'ChillCode',
+  author: 'azetaaa',
+  headerTitle: 'ChillCode',
+  description: 'Take your time, grab a nice cup of coffee, and enjoy!',
   language: 'en-us',
-  theme: 'system', // system, dark or light
+  theme: 'light', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
-  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
+  siteRepo: 'https://github.com/azetaaa/chillcode',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
   socialBanner: '/static/images/twitter-card.png',
@@ -49,6 +49,7 @@ const siteMetadata = {
       category: process.env.NEXT_PUBLIC_GISCUS_CATEGORY,
       categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
       mapping: 'pathname', // supported options: pathname, url, title
+      strict: '1',
       reactions: '1', // Emoji reactions: 1 = enable / 0 = disable
       // Send discussion metadata periodically to the parent window: 1 = enable / 0 = disable
       metadata: '0',
@@ -63,6 +64,7 @@ const siteMetadata = {
       themeURL: '',
       // This corresponds to the `data-lang="en"` in giscus's configurations
       lang: 'en',
+      loading: 'lazy',
     },
   },
   // search: {
