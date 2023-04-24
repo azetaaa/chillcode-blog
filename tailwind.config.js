@@ -28,8 +28,8 @@ module.exports = {
         14: '3.5rem',
       },
       fontFamily: {
-        sans: ['var(--font-space-grotesk)', ...fontFamily.sans],
-        mono: ['var(--font-space-mono)', ...fontFamily.mono],
+        sans: ['Space Grotesk', ...fontFamily.sans],
+        mono: ['Space Mono', ...fontFamily.mono],
       },
       colors: {
         primary: colors.teal,
