@@ -14,10 +14,10 @@ const siteMetadata = {
   image: '/static/images/avatar.png',
   socialBanner: '/static/images/twitter-card.png',
   email: 'address@yoursite.com',
-  github: 'https://github.com',
+  github: 'https://github.com/azetaaa',
   twitter: 'https://twitter.com/Twitter',
-  facebook: 'https://facebook.com',
-  youtube: 'https://youtube.com',
+  facebook: '',
+  youtube: '',
   linkedin: 'https://www.linkedin.com',
   locale: 'en-US',
   analytics: {
