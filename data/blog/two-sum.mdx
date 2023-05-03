@@ -9,19 +9,17 @@ summary: 'Given an input array and a target value, find the two values in the ar
 canonicalUrl: https://chillcode.vercel.app/blog/two-sum
 ---
 
-$O(n\log{}n)$
-
 In this problem, we are given an input array and a target value (in this case, 9), and our objective is to find the two values in the input array that sum up to the target. Once we have identified these two values, we need to return their indices in the input array.
 
 To solve this problem, the most intuitive approach is to check every combination of two values in the input array and see if they can sum up to our target value. This involves scanning through the array multiple times, checking every possible pair of values.
 
 For instance, we start with the first value in the array (2 in this case) and check every combination that includes this value. We then move on to the second value (1) and check every combination that includes this value, and so on.
 
-This approach has a runtime complexity of O(n^2), which is not very efficient. However, since we are guaranteed that there is exactly one solution, we don't have to worry about not finding a solution or multiple solutions.
+This approach has a runtime complexity of $O(n^2)$, which is not very efficient. However, since we are guaranteed that there is exactly one solution, we don't have to worry about not finding a solution or multiple solutions.
 
 One advantage of this brute-force approach is that we don't have to worry about the input array being sorted or unsorted. However, if the input array is very large, this approach may not be practical.
 
-There are more efficient algorithms to solve this problem, such as using a hash table to store the indices of values as we scan through the array. This can reduce the time complexity to O(n), making the solution much more efficient.
+There are more efficient algorithms to solve this problem, such as using a hash table to store the indices of values as we scan through the array. This can reduce the time complexity to $O(n)$, making the solution much more efficient.
 
 To improve the efficiency of our solution, we can take advantage of the fact that for each value in the input array, the value we are looking for is simply the difference between the target value and the current value. For instance, if we are looking at the value 1 and our target value is 4, we need to find the value 3 (4 - 1) in the input array that we can add to 1 to get the target value.
 
@@ -31,11 +29,11 @@ When we start iterating through the input array, we can check if the difference 
 
 To avoid using the same value twice, we need to make sure that the two values we return have different indices in the input array. We can do this by comparing the index of the current value with the index of the value in the hash map that we are using to compute the difference.
 
-This approach has a time complexity of O(n), which is much more efficient than the brute-force approach we discussed earlier. By using a hash map, we can avoid checking every possible combination of values and instead find the solution in a single pass through the input array.
+This approach has a time complexity of $O(n)$, which is much more efficient than the brute-force approach we discussed earlier. By using a hash map, we can avoid checking every possible combination of values and instead find the solution in a single pass through the input array.
 
 The reason this algorithm works is because we know that there are two elements in the array that sum up to the target, but we don't know their indices. As we iterate through the array, we add each element to our hash map, and then check if the difference between the target and the current element exists in the hash map. If it does, then we have found the two elements that sum up to the target and their indices can be returned.
 
-The benefit of this algorithm is that we only need to iterate through the array once, and adding and checking elements in the hash map is a constant time operation. Therefore, the time complexity of this algorithm is O(N). However, the tradeoff is that we need to use extra memory to store the hash map, so the memory complexity is also O(N).
+The benefit of this algorithm is that we only need to iterate through the array once, and adding and checking elements in the hash map is a constant time operation. Therefore, the time complexity of this algorithm is $O(n)$. However, the tradeoff is that we need to use extra memory to store the hash map, so the memory complexity is also $O(n)$.
 
 Overall, this algorithm provides a more efficient solution to the problem of finding two elements in an array that sum up to a given target, compared to the naive approach of checking all possible pairs of elements in the array.
 
@@ -47,6 +45,6 @@ So there you have it, a simple and efficient solution for finding the pair of el
 
 To implement this algorithm, we create a hash map called "previous_map" and iterate through the array, checking if the difference between the target value and the current element is already in the hash map. If it is, we return the indices of the two elements that sum up to the target. If it is not, we add the current element and its index to the hash map and continue iterating.
 
-Of course, like any algorithm, this solution does have some drawbacks. It requires additional memory to create the hash map, and in worst-case scenarios, the time complexity can be O(n^2) if all elements in the array need to be added to the hash map. However, for most use cases, this solution provides a simple and effective way to solve the problem of finding pairs of elements that sum up to a target value in an array.
+Of course, like any algorithm, this solution does have some drawbacks. It requires additional memory to create the hash map, and in worst-case scenarios, the time complexity can be $O(n^2)$ if all elements in the array need to be added to the hash map. However, for most use cases, this solution provides a simple and effective way to solve the problem of finding pairs of elements that sum up to a target value in an array.
 
 I hope this article has been helpful in explaining this algorithm and how it works. If you have any questions or comments, feel free to leave them below!
