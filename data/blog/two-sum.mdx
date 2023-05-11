@@ -9,42 +9,86 @@ summary: 'Given an input array and a target value, find the two values in the ar
 canonicalUrl: https://chillcode.vercel.app/blog/two-sum
 ---
 
-In this problem, we are given an input array and a target value (in this case, 9), and our objective is to find the two values in the input array that sum up to the target. Once we have identified these two values, we need to return their indices in the input array.
+## Problem Description
+
+In this problem, we are given an input array and a target value (in this case 9), and our objective is to find the two values in the input array that sum up to the target. Once we have identified these two values, we need to return their indices in the input array.
+
+#### Example 1:
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+In this case the two values are 2 and 7. Now we want to return the indices of these two values. So the index of two is 0 and the index of seven is 1. So we return [0, 1].
+
+We're guaranteed that there's **exactly one solution**. So we don't have to worry about not finding a solution and we don't have to worry about multiple solutions. For this solution however, we must not use the _same_ element twice.
+
+## Brute Force
 
 To solve this problem, the most intuitive approach is to check every combination of two values in the input array and see if they can sum up to our target value. This involves scanning through the array multiple times, checking every possible pair of values.
 
-For instance, we start with the first value in the array (2 in this case) and check every combination that includes this value. We then move on to the second value (1) and check every combination that includes this value, and so on.
+#### Example 2:
 
-This approach has a runtime complexity of $O(n^2)$, which is not very efficient. However, since we are guaranteed that there is exactly one solution, we don't have to worry about not finding a solution or multiple solutions.
+```
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+```
 
-One advantage of this brute-force approach is that we don't have to worry about the input array being sorted or unsorted. However, if the input array is very large, this approach may not be practical.
+For instance, we start with the first value in the array (3 in this case) and check every combination that includes this value. We then move on to the second value (2) and check every combination that includes this value, and so on.
 
-There are more efficient algorithms to solve this problem, such as using a hash table to store the indices of values as we scan through the array. This can reduce the time complexity to $O(n)$, making the solution much more efficient.
+As we scan through the remainder of the array, notice that we didn't have to check the values that came before the current value (2) because we already checked the combination 3 and 2 beforehand.
 
-To improve the efficiency of our solution, we can take advantage of the fact that for each value in the input array, the value we are looking for is simply the difference between the target value and the current value. For instance, if we are looking at the value 1 and our target value is 4, we need to find the value 3 (4 - 1) in the input array that we can add to 1 to get the target value.
+So the runtime of this algorithm is not super efficient: we're going through the entire array of length $n$ and we're going to do that $n$ times (for each number) in the worst case. This means that this approach has a runtime complexity of $O(n^2)$.
+
+This approach is obviously not good enough but it is still a good idea to get a basic solution as soon as possible. Don't worry about the best algorithm just yet. State a naive algorithm and then optimize your solution from there.
+
+## One Pass
+
+One basic optimization we can implement immediately is to **avoid duplicated work** when scanning through the input array. This usually involves making a _time vs space_ tradeoff by making use of an hash table.
+
+To improve the efficiency of our solution, we can take advantage of the fact that for each value in the input array, the value we are looking for is simply the **difference** between the target value and the current value. For instance, if we are looking at the value 1 and our target value is 4, we need to find the value 3 (4 - 1) in the input array that we can add to 1 to get the target value.
+
+#### Example 3:
+
+```
+Input: nums = [2,1,5,3], target = 4
+Output: [1,3]
+```
+
+So that means 3 is the only value we can add to 1 that will equal the target. So we don't have to check every number: we just want to know if 3 exist, and if yes, find its index.
 
 The most efficient way to do this is to use a hash map to store the indices of each value in the input array. By doing this, we can instantly check if the value we are looking for exists in the hash map. We can map each value to its index in the hash map.
 
 When we start iterating through the input array, we can check if the difference between the target value and the current value exists in the hash map. If it does, we have found the two values that sum up to the target value, and we can return their indices.
 
-To avoid using the same value twice, we need to make sure that the two values we return have different indices in the input array. We can do this by comparing the index of the current value with the index of the value in the hash map that we are using to compute the difference.
+Now the reason why this algorithm can work with just one pass is quite clever: as we start iterating through the array we begin with an empty hash map. For each value we visit when iterating, our hash map only has the values that came before that. If the value that can sum up to our target isn't in the hash map yet, we move on to the next element.
 
-This approach has a time complexity of $O(n)$, which is much more efficient than the brute-force approach we discussed earlier. By using a hash map, we can avoid checking every possible combination of values and instead find the solution in a single pass through the input array.
+Once we get to the last element, our hash map is updated to include every value in the array. So, we are guaranteed that once we visit the second element that sums up to the target, the first one is already in our hash map. This is how we can find the solution with just one pass through the array.
 
-The reason this algorithm works is because we know that there are two elements in the array that sum up to the target, but we don't know their indices. As we iterate through the array, we add each element to our hash map, and then check if the difference between the target and the current element exists in the hash map. If it does, then we have found the two elements that sum up to the target and their indices can be returned.
+This solution avoids using the same value twice by design, so we don't even need to make sure that the two values we return have different indices in the input array (as every number will only ever be considered once).
 
-The benefit of this algorithm is that we only need to iterate through the array once, and adding and checking elements in the hash map is a constant time operation. Therefore, the time complexity of this algorithm is $O(n)$. However, the tradeoff is that we need to use extra memory to store the hash map, so the memory complexity is also $O(n)$.
+By iterating through the array once, we can add each value to our hash map, which is a constant time operation. Additionally, checking if a value exists in our hash map is also a constant time operation. Therefore, the time complexity of this algorithm is $O(n)$.
 
-Overall, this algorithm provides a more efficient solution to the problem of finding two elements in an array that sum up to a given target, compared to the naive approach of checking all possible pairs of elements in the array.
+However, it's essential to note that we are using extra memory. The hash map isn't free, and we potentially need to add every value of the input array to it. Therefore, the space complexity is also going to be $O(n)$.
 
-The reason why this algorithm can work with just one pass is quite clever. Imagine we have a huge array, and we know that two elements in this array sum up to our target. But we don't know where they are located. As we start iterating through the array, we begin with an empty hash map. When we visit the first element, our hash map only has the values that came before the first value. If the second value that can sum up to our target isn't in the hash map yet, we move on to the next element. But once we get to the second element, our hash map is updated to include every value that comes before it. So, we are guaranteed that once we visit the second element that sums up to the target, the first one is already in our hash map. This is how we can find the solution with just one pass through the array.
+So there you have it, a simple and efficient solution for solving the two sum problem. In the end, by using a hash map, we can avoid checking every possible combination of values and instead find the solution in a single pass through by avoiding unnecessary comparisons.
 
-By iterating through the array once, we can add each value to our hash map, which is a constant time operation. Additionally, checking if a value exists in our hash map is also a constant time operation. Therefore, the time complexity of this algorithm is big O of N. However, it's essential to note that we are using extra memory. The hash map isn't free, and we potentially need to add every value to it. Therefore, the memory complexity is also going to be O of N.
+## Coding solution
 
-So there you have it, a simple and efficient solution for finding the pair of elements in an array that sum up to a target value using a hash map. The beauty of this algorithm is that it only requires one pass through the array, making it faster than some other solutions that may require multiple passes or nested loops.
+```py
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        previous_map = {}  # val -> index
 
-To implement this algorithm, we create a hash map called "previous_map" and iterate through the array, checking if the difference between the target value and the current element is already in the hash map. If it is, we return the indices of the two elements that sum up to the target. If it is not, we add the current element and its index to the hash map and continue iterating.
+        for i, n in enumerate(nums):
+            diff = target - n
+            if diff in previous_map:
+                return [previous_map[diff], i]
+            previous_map[n] = i
+```
 
-Of course, like any algorithm, this solution does have some drawbacks. It requires additional memory to create the hash map, and in worst-case scenarios, the time complexity can be $O(n^2)$ if all elements in the array need to be added to the hash map. However, for most use cases, this solution provides a simple and effective way to solve the problem of finding pairs of elements that sum up to a target value in an array.
+To implement this algorithm, we create a hash map (dict) called `previous_map` and iterate through the array, checking if the difference between the target value and the current element is already in the hash map. If it is, we return the indices of the two elements that sum up to the target. If it is not, we add the current element and its index to the hash map and continue iterating.
 
 I hope this article has been helpful in explaining this algorithm and how it works. If you have any questions or comments, feel free to leave them below!
