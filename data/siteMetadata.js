@@ -7,7 +7,7 @@ const siteMetadata = {
   headerTitle: 'ChillCode',
   description: 'Take your time, grab a nice cup of coffee, and enjoy!',
   language: 'en-us',
-  theme: 'light', // system, dark or light
+  theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
   siteRepo: 'https://github.com/azetaaa/chillcode',
   siteLogo: '/static/images/logo.png',

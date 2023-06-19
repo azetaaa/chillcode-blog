@@ -10,7 +10,7 @@ export default function Projects() {
     <>
       <PageSEO title={`Projects - ${siteMetadata.author}`} description={siteMetadata.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
+        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <PageHeading text="Projects" />
         </div>
         <div className="container py-12">
@@ -20,7 +20,7 @@ export default function Projects() {
                 key={d.title}
                 title={d.title}
                 description={d.description}
-                imgSrc={""}
+                imgSrc={''}
                 href={d.href}
               />
             ))}

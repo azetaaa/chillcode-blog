@@ -4,8 +4,8 @@ import 'katex/dist/katex.css'
 // import '@/css/docsearch.css' // Uncomment if using algolia docsearch
 // import '@docsearch/css' // Uncomment if using algolia docsearch
 
-import "@fontsource/space-grotesk"
-import "@fontsource/space-mono"
+import '@fontsource/space-grotesk'
+import '@fontsource/space-mono'
 
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
