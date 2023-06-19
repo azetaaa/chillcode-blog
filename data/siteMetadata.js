@@ -49,7 +49,6 @@ const siteMetadata = {
       category: process.env.NEXT_PUBLIC_GISCUS_CATEGORY,
       categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
       mapping: 'pathname', // supported options: pathname, url, title
-      strict: '1',
       reactions: '1', // Emoji reactions: 1 = enable / 0 = disable
       // Send discussion metadata periodically to the parent window: 1 = enable / 0 = disable
       metadata: '0',
@@ -64,7 +63,6 @@ const siteMetadata = {
       themeURL: '',
       // This corresponds to the `data-lang="en"` in giscus's configurations
       lang: 'en',
-      loading: 'lazy',
     },
   },
   // search: {
